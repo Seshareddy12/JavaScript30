@@ -58,7 +58,22 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+    const buttonKeys = document.querySelectorAll('.key');
+    buttonKeys.forEach(buttonKey => {
+      buttonKey.addEventListener('click',function (e){
+        const audio = document.querySelectorAll(`[data-key="${this.dataset.key}"]`);
+        this.classList.add('playing')
+        audio[1].currentTime = 0;
+        audio[1].play();
+      })
+    })
 
+    buttonKeys.forEach(buttonKey => {
+      buttonKey.addEventListener('transitionend',function (e){
+        this.classList.remove('playing')
+      })
+    })
+    
 </script>
 
 
