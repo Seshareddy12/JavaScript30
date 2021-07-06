@@ -18,13 +18,29 @@
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img class="image" src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
 
     /*
       misc styles, nothing to do with CSS variables
     */
+    :root{
+      --base-color:#ffc600;
+      --border-size:10px;
+      --blur-value: 10px;
+    }
+
+    .image {
+      border-width: var(--border-size);
+      border-style: solid;
+      border-color: var(--base-color);
+      filter: blur(var(--blur-value));
+    }
+
+    .hl{
+      color:var(--base-color);
+    }
 
     body {
       text-align: center;
@@ -45,6 +61,17 @@
   </style>
 
   <script>
+    let root = document.documentElement;
+    document.querySelectorAll('input').forEach(element => {
+       element.addEventListener('input' ,(e) => {
+         if(e.target.name === "base")
+          root.style.setProperty('--base-color',e.target.value);
+         else if(e.target.name === "spacing")
+          root.style.setProperty('--border-size',e.target.value+"px");
+         else if(e.target.name === "blur")
+          root.style.setProperty('--blur-value',e.target.value+"px");
+       })
+    })
   </script>
 
 </body>
